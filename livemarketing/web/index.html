@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Live Marketing</title>
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="open.sources/bootstrap/css/bootstrap.min.css">
+        <!-- Jquery -->
+        <script src="open.sources/jquery/jquery-2.1.3.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="open.sources/bootstrap/js/bootstrap.min.js"></script>
+
+        <script>
+            jQuery(document).ready(function () {
+                initSlider();
+                startSlider();
+                setLocationOfViewDetailButtonIsCenter();
+            });
+
+            function initSlider() {
+                jQuery('.slider_item').css('transition', 'width 0s');
+                jQuery('#slider').width(jQuery('#slider_container').width() * jQuery('.slider_item').length);
+                jQuery('#slider').height(jQuery('#slider_container').height());
+                jQuery('.slider_item').height(jQuery('#slider_container').height());
+                jQuery('.slider_item').width(jQuery('#slider_container').width());                
+                jQuery('#slider').css('margin-left', (-jQuery('#slider_container').width()) + 'px');
+                jQuery('.slider_item').css('transition', 'width 2s');
+            }
+            function startSlider() {
+                var sliderImages = ['images/slider-1.jpg',
+                    'images/slider-2.jpg',
+                    'images/slider-3.jpg',
+                    'images/slider-4.jpg'];
+                //jQuery('.slider_item:first-child').css( 'background-image', 'url('+sliderImages[0]+')');
+                jQuery('.slider_item:nth-child(2)').css('background-image', 'url(' + sliderImages[0] + ')');
+                jQuery('.slider_item:last-child').css('background-image', 'url(' + sliderImages[1] + ')');
+                var sliderIndex = 1;
+                setInterval(function () {
+                    jQuery('.slider_item:first-child').width(0);
+                    setTimeout(function () {
+                        sliderIndex = (sliderIndex + 1) % sliderImages.length;
+                        jQuery('#slider').append(jQuery('.slider_item:first-child'));
+                        jQuery('.slider_item:last-child').width(jQuery('#slider_container').width());
+                        jQuery('.slider_item:last-child').css('background-image', 'url(' + sliderImages[sliderIndex] + ')');
+                    }, 2000);
+
+                }, 7000);
+            }
+
+            window.onresize = function () {
+                initSlider();
+            };
+            //window.addEventListener("resize", myFunction);
+            function setLocationOfViewDetailButtonIsCenter() {
+                jQuery('#temlates_container .container > div').mouseover(
+                        function () {
+                            var btn = $(this).find('>button');
+                            var top = ($(this).height() - $(btn).height()) / 2;
+                            var left = ($(this).width() - $(btn).width()) / 2;
+                            btn.get(0).style.left = left + 'px';
+                            btn.get(0).style.top = top + 'px';
+                        }
+                );
+            }
+        </script>       
+        <style>
+            body { 
+                font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+                font-weight: 300; }
+            #navbar{
+                margin-bottom: 0px;
+            }
+            .header_title{ color: #2aabd2; margin-top: 15px;
+                           margin-bottom: 15px;}
+            .btn_reg{
+                font-size: 24px;
+                height: 46px;
+                line-height: 46px;
+                margin: 30px 0;
+                width: 178px;
+                background-color: rgba(255, 255, 255, 0.05);
+                border: 2px solid #fff;
+                border-radius: 5px;
+                color: #fff;
+                cursor: pointer;
+                display: inline-block;
+                font-weight: normal;
+                outline: medium none;
+                padding: 0;
+                text-align: center;
+            }
+            .btn_reg:hover {
+                background-color: rgba(255, 255, 255, 0.2);
+            } 
+
+            #slider_container{
+                overflow: hidden;
+            }
+            .slider_item{
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-size: cover; 
+                /*background-attachment: fixed;*/
+                float: left;
+                transition-timing-function: ease-in-out;
+            }
+            .center_container{
+                width: 800px;
+                margin: auto;
+            }
+            .header_title h1{
+                text-shadow: 0px 0px 20px  #000;
+                color:#fff;
+                margin-top: 80px;
+            }
+            .header_title h4{
+                text-shadow: 0px 0px 20px  #000;
+                color:#fff;
+            }
+            .header_title button{
+                text-shadow: 0px 0px 20px  #000;
+                color: #fff;
+                border: solid #fff;
+                background-color: rgba(255, 255, 255, 0.05); 
+                margin-top: 60px;
+                box-shadow:  0px 0px 20px  #000;
+            }
+            .header_title button:hover{
+                text-shadow: 0px 0px 4px  #000; 
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+            #temlates_container{
+
+            }
+
+
+            /* Extra small devices (phones, less than 768px) */
+            /* No media query since this is the default in Bootstrap */
+
+            /* Small devices (tablets, 768px and up) */
+            @media (min-width: @screen-sm-min) { 
+            }
+
+            /* Medium devices (desktops, 992px and up) */
+            @media (min-width: @screen-md-min) {
+            }
+
+            /* Large devices (large desktops, 1200px and up) */
+            @media (min-width: @screen-lg-min) { 
+            }
+
+            #temlates_container .container > div{
+                padding: 15px;
+
+            }
+
+            #temlates_container .container > div:hover{
+                background-color: #adadad;
+
+            }
+            #temlates_container .container > div >img{
+                width: 390px;
+                max-width: 100%;
+                opacity: 1;
+                transition:opacity 0.5s;
+            }
+
+
+            #temlates_container .container > div:hover >img{
+                opacity: 0.5;
+            }
+
+            #temlates_container .container > div >button{
+                opacity: 0;
+                transition:opacity 0.5s; 
+                position: absolute;
+                /*top: 50%;
+                margin-left: -25%;*/
+                color: white;
+                background: green;
+            }
+            #temlates_container .container > div:hover >button{
+                opacity: 1;                    
+            }
+
+            #temlates_container .container{
+                width: 96%;
+            }
+            #temlates_container .container >div{
+                text-align:  center;
+            }
+            #temlates_container .container >div>div{
+                position: absolute;
+                width: 100%;
+                height: 100%; 
+                background-color: rgba(255, 255, 255, 0.2);
+                opacity: 0;
+                transition:opacity 0.5s;
+                top:0;
+            }
+
+        </style>
+    </head>
+    <body>
+        <nav id="navbar" class="navbar navbar-default navbar-static-top">
+            <div class="center_container">
+                <div class="navbar-header">                       
+                    <h2 class="h2 header_title" >Live Demo</h2>
+                </div>
+
+            </div>
+        </nav>
+        <!--<div style="height: 52px"></div>-->
+        <section id="slider_container" style="height: 600px;position: relative">
+            <div id="slider">
+                <div  class="slider_item"></div>
+                <div  class="slider_item"></div>
+                <div  class="slider_item"></div>
+            </div>
+            <div class=""  style="position: absolute;top:0;left: 0;width: 100%;height: 100%">
+                <div class="center_container header_title">
+                    <h1>Tạo Website Thật Đơn Giản <br/> Hoàn Toàn Miễn Phí.</h1>
+                    <h4>Nhanh chóng, dễ sử dụng, hổ trợ nhiều loại website.</h4>
+                    <button class="btn-lg" style="">Tạo Website Ngay</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="temlates_container" style="height: 600px;">
+            <h2 style="text-align: center;margin-top: 40px; margin-bottom: 20px;">Chọn Giao Diện</h2>
+            <h5 style="text-align: center;margin-bottom: 40px;">Click "Xem Chi Tiết", sau đó chọn giao nếu cảm thấy vừa ý.</h5>
+            <div class="container">
+                <!-- Example row of columns -->
+
+                <div style="position: relative" class="col-md-4 col-sm-6 col-xs-12 ">
+                    <img src="img/01.jpg" style="margin: auto"/> 
+                    <button  class="btn btn-default btn-lg" role="button">Xem Chi Tiết &raquo;</button>
+                    <h2>Heading</h2>
+                </div>
+                <div style="position: relative" class="col-md-4 col-sm-6 col-xs-12 ">
+                    <img src="img/02.jpg" style="margin: auto"/>
+                    <button  class="btn btn-default btn-lg" role="button">Xem Chi Tiết &raquo;</button>
+                    <h2>Heading</h2>
+                </div>
+                <div style="position: relative" class="col-md-4 col-sm-6 col-xs-12 ">
+                    <img src="img/03.jpg" style="margin: auto"/>
+                    <button  class="btn btn-default btn-lg" role="button">Xem Chi Tiết &raquo;</button>
+                    <h2>Heading</h2>
+                </div>
+
+                <div style="position: relative" class="col-md-4 col-sm-6 col-xs-12 ">
+                    <img src="img/04.jpg" style="margin: auto"/>
+                    <button  class="btn btn-default btn-lg" role="button">Xem Chi Tiết &raquo;</button>
+                    <h2>Heading</h2>
+                </div>
+                <div  class="col-md-4 col-sm-6 col-xs-12 ">
+                    <img src="img/05.jpg" style="margin: auto"/>
+                    <button  class="btn btn-default btn-lg" role="button">Xem Chi Tiết &raquo;</button>
+                    <h2>Heading</h2>
+                </div>
+                <div  class="col-md-4 col-sm-6 col-xs-12 ">
+                    <img src="img/06.jpg" style="margin: auto"/>
+                    <button  class="btn btn-default btn-lg" role="button">Xem Chi Tiết &raquo;</button>
+                    <h2>Heading</h2>
+                </div>
+
+            </div>
+        </section>
+
+    </body>
+</html>
